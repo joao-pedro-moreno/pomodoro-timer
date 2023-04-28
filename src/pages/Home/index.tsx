@@ -1,4 +1,9 @@
 import { HandPalm, Play } from '@phosphor-icons/react'
+import * as zod from 'zod'
+import { FormProvider, useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useContext } from 'react'
+
 import {
   HomeContainer,
   StartCountdownButton,
@@ -6,11 +11,7 @@ import {
 } from './styles'
 import { NewCycleForm } from './components/NewCycleForm'
 import { Countdown } from './components/Countdown'
-import * as zod from 'zod'
-import { FormProvider, useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
 import { CyclesContext } from '../../contexts/CyclesContext'
-import { useContext } from 'react'
 
 const newCycleFormValidationSchema = zod.object({
   task: zod.string().min(1, 'Informe a tarefa'),
@@ -42,7 +43,7 @@ export function Home() {
   }
 
   const task = watch('task')
-  const isSubmitDisabled = !task
+  const isSubmitDisable = !task
 
   return (
     <HomeContainer>
@@ -53,12 +54,12 @@ export function Home() {
         <Countdown />
 
         {activeCycle ? (
-          <StopCountdownButton type="button" onClick={interruptCurrentCycle}>
+          <StopCountdownButton onClick={interruptCurrentCycle} type="button">
             <HandPalm size={24} />
             Interromper
           </StopCountdownButton>
         ) : (
-          <StartCountdownButton type="submit" disabled={isSubmitDisabled}>
+          <StartCountdownButton disabled={isSubmitDisable} type="submit">
             <Play size={24} />
             Começar
           </StartCountdownButton>
