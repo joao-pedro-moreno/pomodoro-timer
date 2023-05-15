@@ -22,6 +22,7 @@
     <li>TypeScript</li>
     <li>React</li>
     <li>Styled-Components</li>
+    <li>React-router-dom</li>
     <li>React-hook-form</li>
     <li>Zod</li>
 </ul>
